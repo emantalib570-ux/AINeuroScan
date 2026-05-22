@@ -57,7 +57,7 @@ python app.py
 
 ## 📸 Screenshots
 
-Add your screenshots here later.
+<img width="578" height="453" alt="image" src="https://github.com/user-attachments/assets/974feb21-fa08-4e5a-b5b6-48215f016ef8" />
 
 ## 👩‍💻 Author
 
