@@ -55,10 +55,6 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## 🌐 Live Demo
-
-[Click Here](https://emantalib570-ux.github.io/AINeuroScan/)
-
 ## 📸 Screenshots
 
 Add your screenshots here later.
