@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Pattern & Security Scanner | Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #6366f1;
+    --primary-glow: rgba(99, 102, 241, 0.5);
+    --bg-dark: #030712;
+    --card-bg: rgba(17, 24, 39, 0.7);
+    --border: rgba(255, 255, 255, 0.1);
+    --text-muted: #9ca3af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 50% -20%, #312e81 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, #1e1b4b 0%, transparent 30%);
+    color: #f3f4f6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+/* Background Animation */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    z-index: 1;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.header h1 {
+    font-size: 38px;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, #9ca3af);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.header p {
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* 3D Glass Card */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px) rotateX(2deg);
+    box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.15);
+}
+
+/* Custom Textarea */
+.input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 160px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    color: #fff;
+    font-size: 15px;
+    resize: none;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+/* Pro Button */
+.button {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+/* Loader with Pulse */
+.loader {
+    display: none;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(99, 102, 241, 0.2);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+/* Result Dashboard */
+.result {
+    display: none;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.verdict-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.grid-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dynamic Classes */
+.success { background: rgba(34, 197, 94, 0.1); color: #4ade80; }
+.warning { background: rgba(245, 158, 11, 0.1); color: #fbbf24; }
+.danger { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>AI NeuroScan<span style="color:var(--primary)">.</span></h1>
+        <p>Pro-grade content analysis with neural patterns.</p>
+    </div>
+
+    <div class="card">
+        <div class="input-wrapper">
+            <textarea id="userInput" placeholder="Drop your content here for deep analysis..."></textarea>
+        </div>
+
+        <button class="button" id="scanBtn" onclick="startScan()">
+            <span id="btnText">Execute Scan</span>
+        </button>
+
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; font-size: 14px; color: var(--text-muted);">Deciphering patterns...</p>
+        </div>
+
+        <div id="result" class="result">
+            <div id="verdict" class="verdict-badge"></div>
+            
+            <div class="grid-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Links</div>
+                    <div class="stat-value" id="links">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">System Code</div>
+                    <div class="stat-value" id="code">-</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Safety Score</div>
+                    <div class="stat-value" id="score" style="color: var(--primary)">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+async function startScan() {
+    const content = document.getElementById('userInput').value;
+    const btn = document.getElementById('scanBtn');
+    const btnText = document.getElementById('btnText');
+    const loader = document.getElementById('loader');
+    const result = document.getElementById('result');
+
+    if (!content) {
+        alert("Please enter some text to analyze.");
+        return;
+    }
+
+    // UI State Change
+    btn.disabled = true;
+    btn.style.opacity = "0.7";
+    btnText.innerText = "Analyzing...";
+    loader.style.display = 'block';
+    result.style.display = 'none';
+
+    try {
+        const res = await fetch('/analyze', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({content})
+        });
+
+        const data = await res.json();
+
+        // Reveal Results
+        loader.style.display = 'none';
+        result.style.display = 'block';
+        btn.disabled = false;
+        btn.style.opacity = "1";
+        btnText.innerText = "Execute Scan";
+
+        const verdict = document.getElementById('verdict');
+        verdict.innerText = data.verdict;
+        verdict.className = "verdict-badge " + (data.color_class || "success");
+
+        document.getElementById('links').innerText = data.links;
+        document.getElementById('code').innerText = data.is_code;
+        document.getElementById('score').innerText = data.score_detail;
+
+    } catch (error) {
+        console.error("Scan failed", error);
+        btnText.innerText = "Error Occurred";
+        loader.style.display = 'none';
+    }
+}
+</script>
+
+</body>
+</html>
